@@ -1,7 +1,7 @@
-import { createStore } from 'redux';
-import { devToolsEnhancer } from '@redux-devtools/extension';
-import { rootReducer } from './reducer';
-// Создаем расширение стора чтобы добавить инструменты разработчика
+import { createStore } from 'redux'; //! 1st
+import { devToolsEnhancer } from '@redux-devtools/extension'; //!2nd
+import { rootReducer } from './reducer'; //! 3rd
+//! Создаем расширение стора чтобы добавить инструменты разработчика
 const enhancer = devToolsEnhancer();
 
 const store = createStore(rootReducer,  enhancer);

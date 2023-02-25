@@ -7,19 +7,21 @@ import Modal from './Modal';
 import { ModalButton } from './Modal/Modal.styled';
 // import shortid from 'shortid';
 import { Title } from './Form/Form.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { addContact, deleteContact } from 'redux/actions';
-
+import { useSelector, useDispatch } from 'react-redux'; //! store subscribe // import dispath 
+import { addContact, deleteContact, setFilter } from 'redux/actions'; //! import actions 
+import { getAllContacts, getFilter } from 'redux/selectors';
 
 const  App = () => {
- const contacts = useSelector(state => state.contacts) ;
-//  const filter = useSelector(state => state.filter);  
+ const contacts = useSelector(getAllContacts) ; //! <== part. store subscribe
+  const filter = useSelector(getFilter);
   // const [contacts, setContacts] = useState(() => {
   //  return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
   // })
-  const dispatch = useDispatch();
   
-  const [filter, setFilter] = useState('')
+
+  const dispatch = useDispatch(); //!dispatch will send actions to reducer
+  
+  // const [filter, setFilter] = useState('')
 
  
 
@@ -32,6 +34,8 @@ const  App = () => {
       setShowModal(true);
    }
   };
+
+  
   useEffect(() => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
@@ -48,21 +52,23 @@ const  App = () => {
       alert(`${name}  is already in contacts`);
       return;
     }
-    const action = addContact({name, number});
-    dispatch(action);
-    // setContacts(prevSate =>  [...prevSate, contact] );
+    
+    dispatch(addContact({name, number})); //! give action to disp => reducer
+    
     toggleModal();
   };
 
 
 
   const handleDeleteContact = id => {
-    const action = deleteContact(id);
-    dispatch(action);
+    // const action = deleteContact(id);
+    // dispatch(action);
+    dispatch(deleteContact(id));
   };
 
-  const changeFilter = ({target}) => {
-    setFilter(target.value);
+  const changeFilter = ({ target }) => {
+    dispatch(setFilter(target.value))
+    // setFilter(target.value);
   };
 
   const filteredContacts = () => {
@@ -99,3 +105,5 @@ const  App = () => {
 }
 
 export default App;
+
+

@@ -8,7 +8,7 @@ import * as yup from 'yup';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is required field'),
-  number: yup.number().min(6).required('Enter minimum 6 digits').positive().integer(),
+  number: yup.number().min(4).required('Enter minimum 6 digits').positive().integer(),
 });
 
 const Form = ({ submitPropValue }) => {

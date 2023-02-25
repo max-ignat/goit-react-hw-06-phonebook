@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from 'components/App';
 // import './index.css';
 
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'; //!give access to store for all componets
 import  store  from './redux/store';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
+  <Provider store={store}> 
     <React.StrictMode>
       <App />
     </React.StrictMode>
