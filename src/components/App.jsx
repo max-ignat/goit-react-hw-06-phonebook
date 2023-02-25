@@ -8,8 +8,10 @@ import { ModalButton } from './Modal/Modal.styled';
 // import shortid from 'shortid';
 import { Title } from './Form/Form.styled';
 import { useSelector, useDispatch } from 'react-redux'; //! store subscribe // import dispath 
-import { addContact, deleteContact, setFilter } from 'redux/actions'; //! import actions 
-import { getAllContacts, getFilter } from 'redux/selectors';
+import { addContact, deleteContact } from 'redux/contacts/contacts-actions'; //! import actions
+import { setFilter } from 'redux/filter/filter-actions'
+import { getAllContacts } from 'redux/contacts/contacts-selectors';
+import { getFilter } from 'redux/filter/filter-selectors';
 
 const  App = () => {
  const contacts = useSelector(getAllContacts) ; //! <== part. store subscribe
@@ -35,7 +37,7 @@ const  App = () => {
    }
   };
 
-  
+
   useEffect(() => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
@@ -45,9 +47,7 @@ const  App = () => {
     
     let added = contacts.find(
       contact => contact.name.toLowerCase() === lowerCasedName
-    );
-
-    
+    );    
     if (added) {
       alert(`${name}  is already in contacts`);
       return;

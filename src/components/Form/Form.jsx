@@ -1,14 +1,24 @@
-import React , { useState } from 'react';
+import React, { useState,useCallback } from 'react';
 import { Formik } from 'formik';
-import { FormInput, Label, Button, Title, FormWrap, Error} from './Form.styled';
+import {
+  FormInput,
+  Label,
+  Button,
+  Title,
+  FormWrap,
+  Error,
+} from './Form.styled';
 import shortid from 'shortid';
 import * as yup from 'yup';
 
-
-
 const schema = yup.object().shape({
   name: yup.string().required('Name is required field'),
-  number: yup.number().min(4).required('Enter minimum 6 digits').positive().integer(),
+  number: yup
+    .number()
+    .min(4)
+    .required('Enter minimum 6 digits')
+    .positive()
+    .integer(),
 });
 
 const Form = ({ submitPropValue }) => {
@@ -17,13 +27,9 @@ const Form = ({ submitPropValue }) => {
     number: '',
   });
 
-
-
   const handleChange = ({ target }) => {
     // console.log(event.currentTarget.value);
-
     const { name, value } = target;
-
     // console.log(value)
     setState(prevState => {
       return { ...prevState, [name]: value };
@@ -42,8 +48,9 @@ const Form = ({ submitPropValue }) => {
     setState({ name: '', number: '' });
   };
 
-  const nameInputId = shortid.generate();
-  const numberInputId = shortid.generate();
+
+  const nameInputId = useCallback(() => {shortid.generate()},[]);
+  const numberInputId = useCallback(() => {shortid.generate()},[]);
 
   const { name, number } = state;
   return (

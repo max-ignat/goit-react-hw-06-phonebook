@@ -1,27 +1,12 @@
-import { ADD_CONTACT, DELETE_CONTACT , SET_FILTER} from './types';
+import { contactsReducer } from "./contacts/contacts-reducer";
+import { filterReducer } from "./filter/filter-reducer";
+import { combineReducers } from "redux";
 
 
- //! Create initial state :
-const initialState = {
-  contacts: JSON.parse(window.localStorage.getItem('contacts')) ?? [],
-  filter: '',
-};
-
-export const rootReducer = (state = initialState, {type, payload}) => { //! state and actions
-  switch (type) {
-    case ADD_CONTACT:
-      const newContact = [...state.contacts, payload];
-      return { ...state, contacts: newContact };
-
-      case DELETE_CONTACT:
-          const result = state.contacts.filter(contact => contact.id !== payload);
-          return {...state, contacts: result};
-      case SET_FILTER:
-          return{...state, filter:payload}
-    default:
-      return state;
-  }
-};
+export const rootReducer = combineReducers({
+    contacts: contactsReducer,
+    filter: filterReducer,
+})
 
 
 // import { createSlice } from '@reduxjs/toolkit';
