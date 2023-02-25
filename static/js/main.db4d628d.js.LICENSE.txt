@@ -85,3 +85,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+//! <== part. store subscribe
+
+//! give action to disp => reducer
+
+//! state and actions
+
+//!( with what to do?/what to do?)
+
+//!give access to store for all componets
